@@ -12,4 +12,5 @@
     <color name="card_background">#394257</color>
     <color name="text_hint">#776A6A</color>
     <color name="btnColor">#E8B50A</color>
+    <color name="result">#234758</color>
 </resources>
