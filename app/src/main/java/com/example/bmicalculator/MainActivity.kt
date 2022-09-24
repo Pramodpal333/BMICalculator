@@ -43,24 +43,43 @@ private lateinit var  cvResult: CardView
 
     fun getBmi(){
 
-        val enteredWeight = etWeight.text.toString().toDouble()
-        val enteredHeight = etHeight.text.toString().toDouble()
+        val enteredWeight = etWeight.text.toString()
+        val enteredHeight = etHeight.text.toString()
 
-        val heightInMeters = enteredHeight / 100
+        if (validateInput(enteredWeight,enteredHeight)) {
 
-        val meterSqr = heightInMeters * heightInMeters
+            val heightInMeters = enteredHeight.toDouble() / 100
 
-        val bmi = enteredWeight/meterSqr
+            val meterSqr = heightInMeters * heightInMeters
 
-        val number3digits:Double = String.format("%.3f", bmi).toDouble()
-        val bmi2digits:Double = String.format("%.2f", number3digits).toDouble()
+            val bmi = enteredWeight.toDouble() / meterSqr
+
+            val number3digits: Double = String.format("%.3f", bmi).toDouble()
+            val bmi2digits: Double = String.format("%.2f", number3digits).toDouble()
 
 
-        tvResult.text = bmi2digits.toString()
+            tvResult.text = bmi2digits.toString()
 
-       bmiCategories(bmi2digits)
-
+            bmiCategories(bmi2digits)
+        }
     }
+
+    private fun validateInput(weight:String? , height:String?) :Boolean{
+        return when{
+            weight.isNullOrEmpty() -> {
+               Toast.makeText(this,"Please enter your weight!",Toast.LENGTH_LONG).show()
+                return false
+            }
+            height.isNullOrEmpty() -> {
+                Toast.makeText(this,"Please enter your height!",Toast.LENGTH_LONG).show()
+                return false
+            }
+            else -> {
+                return true
+            }
+        }
+    }
+
 
     fun bmiCategories(a:Double){
 
